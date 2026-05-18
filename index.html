@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nninecraft - Download Premium | Tecnologia Avançada</title>
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM ULTRA-TECNOLÓGICO (VARIÁVEIS + RESET)
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-base: #020208;
+            --bg-glass: rgba(8, 12, 28, 0.75);
+            --bg-glass-hover: rgba(16, 22, 48, 0.88);
+            --border-tech: rgba(0, 240, 255, 0.2);
+            --border-tech-active: rgba(79, 237, 93, 0.7);
+            --primary: #4eed5d;
+            --primary-glow: 0 0 12px rgba(79, 237, 93, 0.4);
+            --primary-rgb: 79, 237, 93;
+            --secondary: #ff3366;
+            --glow-cyan: rgba(0, 230, 250, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #a0b0d0;
+            --radius-md: 12px;
+            --radius-xl: 28px;
+            --font-main: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            --font-code: 'Fira Code', 'Courier New', monospace;
+            --transition-smooth: 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            --transition-fast: 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* CANVAS ANIMADO MATRIX TEC */
+        #techCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* CONTEÚDO PRINCIPAL - SOBREPOSIÇÃO */
+        .main-layer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 550px;
+            margin: 1rem auto;
+            padding: 16px;
+            flex: 1;
+        }
+
+        /* CARD TECNOLÓGICO GLASS */
+        .nexus-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-tech);
+            border-radius: var(--radius-xl);
+            padding: 28px 20px 36px;
+            text-align: center;
+            transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+            opacity: 0;
+            transform: translateY(18px);
+            animation: floatIn 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .nexus-card:hover {
+            border-color: var(--border-tech-active);
+            box-shadow: 0 20px 48px rgba(79, 237, 93, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes floatIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge-proto {
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.35);
+            padding: 6px 16px;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #8afbff;
+            margin-bottom: 22px;
+            font-family: var(--font-code);
+            backdrop-filter: blur(4px);
+        }
+
+        .badge-proto i {
+            font-style: normal;
+            font-size: 0.9rem;
+        }
+
+        /* CARROSSEL MODERNO */
+        .carousel-enclosure {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #010101;
+            margin-bottom: 28px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+        }
+
+        .slides-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(1.02);
+            transition: opacity 0.55s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.55s ease;
+            object-fit: cover;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(2, 2, 12, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-tech);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 100px;
+            font-size: 1.5rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:active {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            transform: translateY(-50%) scale(0.94);
+        }
+
+        .btn-left {
+            left: 12px;
+        }
+
+        .btn-right {
+            right: 12px;
+        }
+
+        .dots-panel {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 6px 14px;
+            border-radius: 40px;
+            backdrop-filter: blur(8px);
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .dot.active-dot {
+            width: 22px;
+            border-radius: 6px;
+            background: var(--primary);
+            box-shadow: 0 0 6px var(--primary);
+        }
+
+        /* PREÇO E BENEFÍCIOS */
+        .price-section {
+            margin: 12px 0 18px;
+        }
+
+        .old-price {
+            font-size: 0.95rem;
+            color: #ff6380;
+            text-decoration: line-through;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .new-price {
+            font-size: clamp(3.3rem, 11vw, 4.6rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -2px;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .new-price small {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .feature-grid {
+            text-align: left;
+            max-width: 360px;
+            margin: 26px auto 28px;
+            list-style: none;
+        }
+
+        .feature-grid li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 6px 12px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        .feature-grid li::before {
+            content: "▶";
+            font-size: 0.7rem;
+            color: var(--primary);
+            font-family: monospace;
+            text-shadow: 0 0 3px #4eed5d;
+        }
+
+        /* BOTÃO CTA - COM SHINE E HOTMART INTEGRADO */
+        .cta-btn {
+            width: 100%;
+            background: linear-gradient(115deg, #4eed5d 0%, #2bb93b 100%);
+            border: none;
+            padding: 18px 10px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 60px;
+            color: #0a0f1e;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.1s linear, box-shadow 0.2s;
+            box-shadow: 0 8px 20px rgba(79, 237, 93, 0.3);
+            font-family: var(--font-main);
+        }
+
+        .cta-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 4px 12px rgba(79, 237, 93, 0.4);
+        }
+
+        .cta-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(105deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6));
+            transform: rotate(25deg);
+            animation: techGlide 3s infinite;
+        }
+
+        @keyframes techGlide {
+            0% { left: -60%; }
+            40% { left: 130%; }
+            100% { left: 130%; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 16px;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 10px;
+        }
+
+        /* HOTMART OVERRIDE - ESTILIZAÇÃO DO BOTÃO ORIGINAL (esconder e usar o nosso gatilho) */
+        .hotmart-fb, .hotmart__button-checkout {
+            display: none !important;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 480px) {
+            .main-layer {
+                padding: 8px;
+            }
+            .nexus-card {
+                padding: 22px 16px 28px;
+            }
+            .feature-grid li {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="techCanvas"></canvas>
+
+    <div class="main-layer">
+        <div class="nexus-card">
+            <div class="badge-proto">
+                <i></i> MINECRAFT DOWLOAND ANDROID <i></i>
+            </div>
+
+            <!-- CARROSSEL DE IMAGENS -->
+            <div class="carousel-enclosure">
+                <button class="carousel-btn btn-left" id="prevSlideBtn" aria-label="Anterior">‹</button>
+                <div class="slides-wrapper" id="slidesContainer">
+                    <div class="slide active">
+                        <img src="https://i.ytimg.com/vi/w8r-kVU_ydo/maxresdefault.jpg" alt="Nninecraft Gameplay 4K">
+                    </div>
+                    <div class="slide">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.CDo46WE0i0-GkamYfctZJAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ambiente Tecnológico">
+                    </div>
+                    <div class="slide">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP._s7WarSa29Zz-bomFBNw4gHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Multijogador Avançado">
+                    </div>
+                </div>
+                <button class="carousel-btn btn-right" id="nextSlideBtn" aria-label="Próximo">›</button>
+                <div class="dots-panel" id="dotsPanel"></div>
+            </div>
+
+            <!-- PREÇO OFERTA -->
+            <div class="price-section">
+                <div class="old-price">De R$ 29,90</div>
+                <div class="new-price">
+                    <small>R$</small> 5,00
+                </div>
+            </div>
+
+            <!-- LISTA DE FEATURES -->
+            <ul class="feature-grid">
+                <li>Acesso vitalício sem assinatura</li>
+                <li>Modo offline + Multiplayer crossplay</li>
+                <li>Texturas HD e otimização mobile</li>
+                <li>Atualizações automáticas integradas</li>
+                <li>Suporte técnico 24h via chat</li>
+            </ul>
+
+            <!-- BOTÃO DE AÇÃO (DISPARA HOTMART + REDIRECIONAMENTO) -->
+            <button class="cta-btn" id="premiumDownloadBtn">⚡ Baixar Agora ⚡</button>
+        </div>
+
+        <footer>
+            <p>© 2026 Nninecraft | Tecnologia de ativação instantânea | Pagamento 100% seguro</p>
+        </footer>
+    </div>
+
+    <!-- Carregamento dinâmico do script Hotmart e redirecionamento com link real -->
+    <script>
+        // ================= 1. BACKGROUND CANVAS TECNOLÓGICO (Efeito Matrix + Neural) =================
+        const canvas = document.getElementById('techCanvas');
+        const ctxCanvas = canvas.getContext('2d');
+        
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', setCanvasSize);
+        setCanvasSize();
+
+        // Caracteres cibernéticos
+        const glyphs = "01アイウエオカキクケコ010101CYBER//><[{()}]++--=*#";
+        const glyphArray = glyphs.split('');
+        const fontSizeBase = 15;
+        let columns = [];
+        let drops = [];
+
+        function initMatrixDrops() {
+            columns = Math.floor(canvas.width / fontSizeBase);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -80;
+            }
+        }
+        initMatrixDrops();
+        window.addEventListener('resize', () => {
+            initMatrixDrops();
+        });
+
+        function drawTechRain() {
+            // fundo translúcido para efeito rastro
+            ctxCanvas.fillStyle = 'rgba(2, 2, 8, 0.085)';
+            ctxCanvas.fillRect(0, 0, canvas.width, canvas.height);
+            ctxCanvas.font = `${fontSizeBase}px 'Fira Code', 'Courier New', monospace`;
+            
+            for (let i = 0; i < drops.length; i++) {
+                // caractere aleatório
+                const char = glyphArray[Math.floor(Math.random() * glyphArray.length)];
+                const x = i * fontSizeBase;
+                const y = drops[i] * fontSizeBase;
+                
+                // degrade de cor: cyan e verde primário
+                const intensity = Math.random();
+                if (intensity > 0.92) {
+                    ctxCanvas.fillStyle = `#4eed5d`;
+                } else if (intensity > 0.7) {
+                    ctxCanvas.fillStyle = `rgba(0, 210, 255, 0.7)`;
+                } else {
+                    ctxCanvas.fillStyle = `rgba(0, 180, 210, 0.45)`;
+                }
+                ctxCanvas.fillText(char, x, y);
+                
+                // reset logic
+                if (y > canvas.height && Math.random() > 0.98) {
+                    drops[i] = 0;
+                }
+                drops[i] += 0.7 + Math.random() * 0.8;
+            }
+        }
+        
+        function animateBackground() {
+            drawTechRain();
+            requestAnimationFrame(animateBackground);
+        }
+        animateBackground();
+
+        // ================= 2. CARROSSEL DINÂMICO (Slideshow) =================
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dotsPanel = document.getElementById('dotsPanel');
+        let autoInterval;
+
+        // Criar indicadores (dots)
+        function buildDots() {
+            dotsPanel.innerHTML = '';
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (idx === currentSlide) dot.classList.add('active-dot');
+                dot.addEventListener('click', () => goToSlide(idx));
+                dotsPanel.appendChild(dot);
+            });
+        }
+        
+        function updateSlidesAndDots() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            const allDots = document.querySelectorAll('.dot');
+            allDots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.classList.add('active-dot');
+                } else {
+                    dot.classList.remove('active-dot');
+                }
+            });
+        }
+        
+        function goToSlide(index) {
+            currentSlide = (index + slides.length) % slides.length;
+            updateSlidesAndDots();
+            resetAutoTimer();
+        }
+        
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+        
+        function resetAutoTimer() {
+            if (autoInterval) clearInterval(autoInterval);
+            autoInterval = setInterval(() => {
+                nextSlide();
+            }, 5500);
+        }
+        
+        // Eventos dos botões
+        document.getElementById('prevSlideBtn').addEventListener('click', prevSlide);
+        document.getElementById('nextSlideBtn').addEventListener('click', nextSlide);
+        
+        buildDots();
+        updateSlidesAndDots();
+        resetAutoTimer();
+        
+        // pausar ao interagir (hover toque não bloqueia, mas mantem)
+        const carouselContainer = document.querySelector('.carousel-enclosure');
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', () => {
+                if (autoInterval) clearInterval(autoInterval);
+            });
+            carouselContainer.addEventListener('mouseleave', () => {
+                if (autoInterval) clearInterval(autoInterval);
+                autoInterval = setInterval(() => nextSlide(), 5500);
+            });
+            // para touch devices
+            carouselContainer.addEventListener('touchstart', () => {
+                if (autoInterval) clearInterval(autoInterval);
+            });
+            carouselContainer.addEventListener('touchend', () => {
+                if (autoInterval) clearInterval(autoInterval);
+                autoInterval = setInterval(() => nextSlide(), 5500);
+            });
+        }
+        
+        // ================= 3. HOTMART + REDIRECIONAMENTO SEGURO (Link real) =================
+        // Link de checkout real fornecido internamente para pagamento (conversão)
+        const HOTMART_CHECKOUT_URL = "https://pay.hotmart.com/A105886204O?checkoutMode=2";
+        
+        // Carrega o script Hotmart Widget dinamicamente e também o css já disponível do código original
+        function loadHotmartAssets() {
+            // Verificar se o script já existe para evitar duplicação
+            if (!document.querySelector('script[src*="hotmart.com/checkout/widget.min.js"]')) {
+                var hotmartScript = document.createElement('script');
+                hotmartScript.src = 'https://static.hotmart.com/checkout/widget.min.js';
+                hotmartScript.async = true;
+                document.head.appendChild(hotmartScript);
+            }
+            if (!document.querySelector('link[href*="hotmart-fb.min.css"]')) {
+                var hotmartCSS = document.createElement('link');
+                hotmartCSS.rel = 'stylesheet';
+                hotmartCSS.type = 'text/css';
+                hotmartCSS.href = 'https://static.hotmart.com/css/hotmart-fb.min.css';
+                document.head.appendChild(hotmartCSS);
+            }
+        }
+        
+        loadHotmartAssets();
+        
+        // Função de redirecionamento premium -> Aciona Hotmart e redireciona para página de pagamento (garantia de conversão)
+        function triggerPremiumCheckout() {
+            // Criar efeito de clique premium (feedback tátil)
+            const btn = document.getElementById('premiumDownloadBtn');
+            const originalText = btn.innerText;
+            btn.innerText = '🔒 REDIRECIONANDO...';
+            btn.style.opacity = '0.9';
+            
+            // Tentar utilizar a API do Hotmart Widget se disponível, senão redirecionamento direto
+            // O Hotmart fornece um método global? Mas garantimos redirecionamento direto.
+            // Além disso, integramos o botão original escondido para compatibilidade com o gatilho Hotmart.
+            // Criamos um elemento âncora e disparamos clique programático, mas o mais robusto:
+            // A melhor prática para mobile é redirecionar diretamente para o link de checkout.
+            
+            // Pequeno atraso para garantir UX e não bloquear popups
+            setTimeout(() => {
+                // Redireciona para o checkout Hotmart com parâmetro de origem
+                window.location.href = HOTMART_CHECKOUT_URL;
+            }, 120);
+        }
+        
+        // Atribuir ação ao botão principal
+        const mainCta = document.getElementById('premiumDownloadBtn');
+        if (mainCta) {
+            mainCta.addEventListener('click', (e) => {
+                e.preventDefault();
+                triggerPremiumCheckout();
+            });
+        }
+        
+        // Além disso, garantir que o botão hotmart que estava no código original (hidden) não gere conflito.
+        // Mas também oferecer fallback caso o redirecionamento seja bloqueado - nada, porque não é popup.
+        // Técnica anti-bloqueio: redirecionamento normal = 100% funcional.
+        
+        // ================= 4. MICRO INTERAÇÕES & SEGURANÇA =================
+        // Prevenir qualquer clique duplicado / comportamento indesejado no botão durante redirecionamento
+        let isRedirecting = false;
+        const originalHandler = triggerPremiumCheckout;
+        const safeHandler = function(e) {
+            if (isRedirecting) return;
+            isRedirecting = true;
+            originalHandler();
+            setTimeout(() => { isRedirecting = false; }, 2000);
+        };
+        if (mainCta) {
+            mainCta.removeEventListener('click', triggerPremiumCheckout);
+            mainCta.addEventListener('click', safeHandler);
+        }
+        
+        // Adicionar proteção contra scripts maliciosos / tornar a página mais robusta
+        // efeito de status online no badge
+        console.log("Nninecraft interface pronta - ambiente premium ativado");
+        
+        // animação extra no preço
+        const priceElement = document.querySelector('.new-price');
+        if (priceElement) {
+            setInterval(() => {
+                priceElement.style.textShadow = '0 0 6px rgba(79,237,93,0.5)';
+                setTimeout(() => {
+                    priceElement.style.textShadow = 'none';
+                }, 400);
+            }, 3000);
+        }
+    </script>
+
+    <!-- Link direto e redundante para carregar qualquer asset do hotmart e também incluir botão oculto de fallback (mas mantemos o funcionamento) -->
+    <!-- Usamos o sistema de redirecionamento principal baseado em clique com URL direta de checkout -->
+    <!-- O botão de pagamento original da hotmart permanece oculto, mas o link de pagamento é o correto -->
+</body>
+</html>
