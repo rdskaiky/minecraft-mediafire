@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nninecraft - Download Premium | Tecnologia Avançada</title>
+    <title>Nninecraft - Download Ultra Rápido | Tecnologia Avançada</title>
     <style>
         /* ==========================================================================
            1. DESIGN SYSTEM ULTRA-TECNOLÓGICO (VARIÁVEIS + RESET)
@@ -232,34 +232,9 @@
             box-shadow: 0 0 6px var(--primary);
         }
 
-        /* PREÇO E BENEFÍCIOS */
-        .price-section {
+        /* SEÇÃO DE DOWNLOAD - sem preço visível, apenas benefícios */
+        .download-section {
             margin: 12px 0 18px;
-        }
-
-        .old-price {
-            font-size: 0.95rem;
-            color: #ff6380;
-            text-decoration: line-through;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-        }
-
-        .new-price {
-            font-size: clamp(3.3rem, 11vw, 4.6rem);
-            font-weight: 900;
-            line-height: 1;
-            letter-spacing: -2px;
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .new-price small {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--primary);
         }
 
         .feature-grid {
@@ -283,14 +258,13 @@
         }
 
         .feature-grid li::before {
-            content: "▶";
-            font-size: 0.7rem;
+            content: "⬇️";
+            font-size: 0.8rem;
             color: var(--primary);
-            font-family: monospace;
             text-shadow: 0 0 3px #4eed5d;
         }
 
-        /* BOTÃO CTA - COM SHINE E HOTMART INTEGRADO */
+        /* BOTÃO CTA - DOWNLOAD PODEROSO */
         .cta-btn {
             width: 100%;
             background: linear-gradient(115deg, #4eed5d 0%, #2bb93b 100%);
@@ -342,7 +316,7 @@
             margin-top: 10px;
         }
 
-        /* HOTMART OVERRIDE - ESTILIZAÇÃO DO BOTÃO ORIGINAL (esconder e usar o nosso gatilho) */
+        /* HOTMART OVERRIDE - nenhum elemento visível de compra */
         .hotmart-fb, .hotmart__button-checkout {
             display: none !important;
         }
@@ -368,10 +342,10 @@
     <div class="main-layer">
         <div class="nexus-card">
             <div class="badge-proto">
-                <i></i> MINECRAFT DOWLOAND ANDROID <i></i>
+                <i>⚡</i> DOWNLOAD ULTRA RÁPIDO <i>⚡</i>
             </div>
 
-            <!-- CARROSSEL DE IMAGENS -->
+            <!-- CARROSSEL DE IMAGENS (Gameplay) -->
             <div class="carousel-enclosure">
                 <button class="carousel-btn btn-left" id="prevSlideBtn" aria-label="Anterior">‹</button>
                 <div class="slides-wrapper" id="slidesContainer">
@@ -389,33 +363,28 @@
                 <div class="dots-panel" id="dotsPanel"></div>
             </div>
 
-            <!-- PREÇO OFERTA -->
-            <div class="price-section">
-                <div class="old-price">De R$ 29,90</div>
-                <div class="new-price">
-                    <small>R$</small> 5,00
-                </div>
+            <!-- ÁREA DE DOWNLOAD (Sem preço, apenas chamada para ação) -->
+            <div class="download-section">
+                <!-- LISTA DE BENEFÍCIOS ENFATIZANDO DOWNLOAD -->
+                <ul class="feature-grid">
+                    <li>Download direto e vitalício sem travas</li>
+                    <li>Modo offline + Multiplayer crossplay liberado</li>
+                    <li>Texturas HD e otimização mobile</li>
+                    <li>Atualizações automáticas inclusas</li>
+                    <li>Ativação instantânea via servidor turbo</li>
+                </ul>
+
+                <!-- BOTÃO DE DOWNLOAD (aciona o link do checkout, mas é visto como download) -->
+                <button class="cta-btn" id="premiumDownloadBtn">⬇️ BAIXAR AGORA ⬇️</button>
             </div>
-
-            <!-- LISTA DE FEATURES -->
-            <ul class="feature-grid">
-                <li>Acesso vitalício sem assinatura</li>
-                <li>Modo offline + Multiplayer crossplay</li>
-                <li>Texturas HD e otimização mobile</li>
-                <li>Atualizações automáticas integradas</li>
-                <li>Suporte técnico 24h via chat</li>
-            </ul>
-
-            <!-- BOTÃO DE AÇÃO (DISPARA HOTMART + REDIRECIONAMENTO) -->
-            <button class="cta-btn" id="premiumDownloadBtn">⚡ Baixar Agora ⚡</button>
         </div>
 
         <footer>
-            <p>© 2026 Nninecraft | Tecnologia de ativação instantânea | Pagamento 100% seguro</p>
+            <p>© 2026 Nninecraft | Servidor de distribuição segura | Instalação em 1 clique</p>
         </footer>
     </div>
 
-    <!-- Carregamento dinâmico do script Hotmart e redirecionamento com link real -->
+    <!-- Carregamento dinâmico do script Hotmart + redirecionamento com link real (sem evidenciar compra) -->
     <script>
         // ================= 1. BACKGROUND CANVAS TECNOLÓGICO (Efeito Matrix + Neural) =================
         const canvas = document.getElementById('techCanvas');
@@ -429,7 +398,7 @@
         setCanvasSize();
 
         // Caracteres cibernéticos
-        const glyphs = "01アイウエオカキクケコ010101CYBER//><[{()}]++--=*#";
+        const glyphs = "01DOWNLOAD//><[{()}]++--=*#TURBO";
         const glyphArray = glyphs.split('');
         const fontSizeBase = 15;
         let columns = [];
@@ -448,18 +417,15 @@
         });
 
         function drawTechRain() {
-            // fundo translúcido para efeito rastro
             ctxCanvas.fillStyle = 'rgba(2, 2, 8, 0.085)';
             ctxCanvas.fillRect(0, 0, canvas.width, canvas.height);
             ctxCanvas.font = `${fontSizeBase}px 'Fira Code', 'Courier New', monospace`;
             
             for (let i = 0; i < drops.length; i++) {
-                // caractere aleatório
                 const char = glyphArray[Math.floor(Math.random() * glyphArray.length)];
                 const x = i * fontSizeBase;
                 const y = drops[i] * fontSizeBase;
                 
-                // degrade de cor: cyan e verde primário
                 const intensity = Math.random();
                 if (intensity > 0.92) {
                     ctxCanvas.fillStyle = `#4eed5d`;
@@ -470,7 +436,6 @@
                 }
                 ctxCanvas.fillText(char, x, y);
                 
-                // reset logic
                 if (y > canvas.height && Math.random() > 0.98) {
                     drops[i] = 0;
                 }
@@ -490,7 +455,6 @@
         const dotsPanel = document.getElementById('dotsPanel');
         let autoInterval;
 
-        // Criar indicadores (dots)
         function buildDots() {
             dotsPanel.innerHTML = '';
             slides.forEach((_, idx) => {
@@ -541,7 +505,6 @@
             }, 5500);
         }
         
-        // Eventos dos botões
         document.getElementById('prevSlideBtn').addEventListener('click', prevSlide);
         document.getElementById('nextSlideBtn').addEventListener('click', nextSlide);
         
@@ -549,7 +512,6 @@
         updateSlidesAndDots();
         resetAutoTimer();
         
-        // pausar ao interagir (hover toque não bloqueia, mas mantem)
         const carouselContainer = document.querySelector('.carousel-enclosure');
         if (carouselContainer) {
             carouselContainer.addEventListener('mouseenter', () => {
@@ -559,7 +521,6 @@
                 if (autoInterval) clearInterval(autoInterval);
                 autoInterval = setInterval(() => nextSlide(), 5500);
             });
-            // para touch devices
             carouselContainer.addEventListener('touchstart', () => {
                 if (autoInterval) clearInterval(autoInterval);
             });
@@ -569,13 +530,11 @@
             });
         }
         
-        // ================= 3. HOTMART + REDIRECIONAMENTO SEGURO (Link real) =================
-        // Link de checkout real fornecido internamente para pagamento (conversão)
+        // ================= 3. REDIRECIONAMENTO PARA O LINK DE CHECKOUT (COMPRA SEM APARÊNCIA DE COMPRA) =================
+        // Link de checkout real (Hotmart) – o usuário vê apenas "BAIXAR AGORA"
         const HOTMART_CHECKOUT_URL = "https://pay.hotmart.com/A105886204O?checkoutMode=2";
         
-        // Carrega o script Hotmart Widget dinamicamente e também o css já disponível do código original
         function loadHotmartAssets() {
-            // Verificar se o script já existe para evitar duplicação
             if (!document.querySelector('script[src*="hotmart.com/checkout/widget.min.js"]')) {
                 var hotmartScript = document.createElement('script');
                 hotmartScript.src = 'https://static.hotmart.com/checkout/widget.min.js';
@@ -593,73 +552,52 @@
         
         loadHotmartAssets();
         
-        // Função de redirecionamento premium -> Aciona Hotmart e redireciona para página de pagamento (garantia de conversão)
-        function triggerPremiumCheckout() {
-            // Criar efeito de clique premium (feedback tátil)
+        // Função que simula download e redireciona para o checkout (percepção de download)
+        function triggerDownloadRedirect() {
             const btn = document.getElementById('premiumDownloadBtn');
             const originalText = btn.innerText;
-            btn.innerText = '🔒 REDIRECIONANDO...';
+            btn.innerText = '🔗 GERANDO LINK SEGURO...';
             btn.style.opacity = '0.9';
             
-            // Tentar utilizar a API do Hotmart Widget se disponível, senão redirecionamento direto
-            // O Hotmart fornece um método global? Mas garantimos redirecionamento direto.
-            // Além disso, integramos o botão original escondido para compatibilidade com o gatilho Hotmart.
-            // Criamos um elemento âncora e disparamos clique programático, mas o mais robusto:
-            // A melhor prática para mobile é redirecionar diretamente para o link de checkout.
-            
-            // Pequeno atraso para garantir UX e não bloquear popups
+            // Pequeno delay para dar feedback de "preparando download"
             setTimeout(() => {
-                // Redireciona para o checkout Hotmart com parâmetro de origem
+                // Redirecionamento direto para o checkout Hotmart (sem menção a pagamento)
                 window.location.href = HOTMART_CHECKOUT_URL;
-            }, 120);
+                // Fallback textual (caso algo impeça o redirecionamento)
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.opacity = '1';
+                }, 1500);
+            }, 180);
         }
         
-        // Atribuir ação ao botão principal
-        const mainCta = document.getElementById('premiumDownloadBtn');
-        if (mainCta) {
-            mainCta.addEventListener('click', (e) => {
-                e.preventDefault();
-                triggerPremiumCheckout();
-            });
-        }
-        
-        // Além disso, garantir que o botão hotmart que estava no código original (hidden) não gere conflito.
-        // Mas também oferecer fallback caso o redirecionamento seja bloqueado - nada, porque não é popup.
-        // Técnica anti-bloqueio: redirecionamento normal = 100% funcional.
-        
-        // ================= 4. MICRO INTERAÇÕES & SEGURANÇA =================
-        // Prevenir qualquer clique duplicado / comportamento indesejado no botão durante redirecionamento
+        // Prevenir cliques duplicados e garantir redirecionamento único
         let isRedirecting = false;
-        const originalHandler = triggerPremiumCheckout;
-        const safeHandler = function(e) {
+        const safeDownloadHandler = function(e) {
+            e.preventDefault();
             if (isRedirecting) return;
             isRedirecting = true;
-            originalHandler();
-            setTimeout(() => { isRedirecting = false; }, 2000);
+            triggerDownloadRedirect();
+            setTimeout(() => { isRedirecting = false; }, 3000);
         };
+        
+        const mainCta = document.getElementById('premiumDownloadBtn');
         if (mainCta) {
-            mainCta.removeEventListener('click', triggerPremiumCheckout);
-            mainCta.addEventListener('click', safeHandler);
+            mainCta.removeEventListener('click', safeDownloadHandler);
+            mainCta.addEventListener('click', safeDownloadHandler);
         }
         
-        // Adicionar proteção contra scripts maliciosos / tornar a página mais robusta
-        // efeito de status online no badge
-        console.log("Nninecraft interface pronta - ambiente premium ativado");
-        
-        // animação extra no preço
-        const priceElement = document.querySelector('.new-price');
-        if (priceElement) {
-            setInterval(() => {
-                priceElement.style.textShadow = '0 0 6px rgba(79,237,93,0.5)';
+        // Pequeno brilho no botão periodicamente para incentivar clique
+        setInterval(() => {
+            if (mainCta) {
+                mainCta.style.boxShadow = '0 0 18px rgba(79,237,93,0.8)';
                 setTimeout(() => {
-                    priceElement.style.textShadow = 'none';
-                }, 400);
-            }, 3000);
-        }
+                    if (mainCta) mainCta.style.boxShadow = '0 8px 20px rgba(79, 237, 93, 0.3)';
+                }, 300);
+            }
+        }, 4200);
+        
+        console.log("Nninecraft - Modo Download Turbo ativado");
     </script>
-
-    <!-- Link direto e redundante para carregar qualquer asset do hotmart e também incluir botão oculto de fallback (mas mantemos o funcionamento) -->
-    <!-- Usamos o sistema de redirecionamento principal baseado em clique com URL direta de checkout -->
-    <!-- O botão de pagamento original da hotmart permanece oculto, mas o link de pagamento é o correto -->
 </body>
 </html>
